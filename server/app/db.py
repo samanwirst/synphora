@@ -3,7 +3,7 @@ from config import DB_PATH
 
 CREATE_TABLE_SQL = """
 CREATE TABLE IF NOT EXISTS users (
-    telegram_user_id INTEGER PRIMARY KEY,
+    user_uuid TEXT PRIMARY KEY,
     audiolist TEXT NOT NULL DEFAULT ''
 );
 """

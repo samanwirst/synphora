@@ -3,7 +3,7 @@ from app.routes.users import router as users_router
 from app.dependencies import verify_bot_key
 from app.db import init_db
 
-app = FastAPI(title="Users API")
+app = FastAPI(title="Synphora API")
 
 @app.on_event("startup")
 def on_startup():

@@ -4,10 +4,10 @@ from app import crud
 
 router = APIRouter()
 
-@router.get("/{telegram_user_id}", response_model=User)
-async def get_user(telegram_user_id: int = Path(..., description="Telegram user id")):
+@router.get("/{user_uuid}", response_model=User)
+async def get_user(user_uuid: str = Path(..., description="User UUID")):
     try:
-        return crud.get_user(telegram_user_id)
+        return crud.get_user(user_uuid)
     except KeyError:
         raise HTTPException(status_code=404, detail="User not found")
 
@@ -18,23 +18,23 @@ async def create_user(user: UserCreate):
     except ValueError as e:
         raise HTTPException(status_code=400, detail=str(e))
 
-@router.post("/{telegram_user_id}/audiolist", response_model=User)
+@router.post("/{user_uuid}/audiolist", response_model=User)
 async def add_audiolist(
-    telegram_user_id: int = Path(..., description="Telegram user id"),
+    user_uuid: str = Path(..., description="User UUID"),
     payload: AudiolistPayload | None = None,
 ):
     audios = payload.audiolist if payload is not None else []
     try:
-        return crud.append_audios(telegram_user_id, audios)
+        return crud.append_audios(user_uuid, audios)
     except KeyError:
         raise HTTPException(status_code=404, detail="User not found")
 
-@router.delete("/{telegram_user_id}/audiolist/{item_id}", response_model=User)
+@router.delete("/{user_uuid}/audiolist/{item_id}", response_model=User)
 async def delete_audiolist_item(
-    telegram_user_id: int = Path(..., description="Telegram user id"),
+    user_uuid: str = Path(..., description="User UUID"),
     item_id: int = Path(..., description="Audio item id to delete"),
 ):
     try:
-        return crud.delete_audio(telegram_user_id, item_id)
+        return crud.delete_audio(user_uuid, item_id)
     except KeyError as e:
         raise HTTPException(status_code=404, detail=str(e))

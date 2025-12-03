@@ -2,7 +2,7 @@ from pydantic import BaseModel, Field
 from typing import List
 
 class UserBase(BaseModel):
-    telegram_user_id: int = Field(..., example=123456789)
+    user_uuid: str = Field(..., example="d128a4fc-dc6f-4b11-8c12-657e811e1ace")
 
 class UserCreate(UserBase):
     audiolist: List[int] = Field(default_factory=list, example=[1, 2, 3])
