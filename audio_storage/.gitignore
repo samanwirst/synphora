@@ -215,6 +215,5 @@ __marimo__/
 # Streamlit
 .streamlit/secrets.toml
 
-# Database
-message_id_storage.db
-user_id_storage.db
+# Audio storage dir
+files

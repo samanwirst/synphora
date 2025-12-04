@@ -15,8 +15,8 @@ async def get_user(user_uuid: str = Path(..., description="User UUID")):
 @router.post("/", response_model=User, status_code=status.HTTP_201_CREATED)
 async def create_user(
     user: UserCreate, 
-    _bot_ok: bool = Depends(verify_bot_key
-)):
+    _bot_ok: bool = Depends(verify_bot_key)
+):
     try:
         return crud.create_user(user)
     except ValueError as e:
@@ -37,7 +37,7 @@ async def add_audiolist(
 @router.delete("/{user_uuid}/audiolist/{item_id}", response_model=User)
 async def delete_audiolist_item(
     user_uuid: str = Path(..., description="User UUID"),
-    item_id: int = Path(..., description="Audio item id to delete"),
+    item_id: str = Path(..., description="Audio item uuid to delete"),
     _bot_ok: bool = Depends(verify_bot_key),
 ):
     try:

@@ -3,7 +3,7 @@ from pathlib import Path
 from typing import Optional
 import uuid
 
-from config import ID_STORAGE_PATH
+from config import USER_ID_STORAGE_PATH
 
 CREATE_TABLE_SQL = """
 CREATE TABLE IF NOT EXISTS id_map (
@@ -12,9 +12,9 @@ CREATE TABLE IF NOT EXISTS id_map (
 );
 """
 
-class IDStorageUtils:
+class UserIDStorageUtils:
     def __init__(self, db_path: Optional[str | Path] = None):
-        self.db_path = Path(db_path) if db_path is not None else ID_STORAGE_PATH
+        self.db_path = Path(db_path) if db_path is not None else USER_ID_STORAGE_PATH
         self.db_path.parent.mkdir(parents=True, exist_ok=True)
         self._ensure_table()
 

@@ -3,13 +3,13 @@ from typing import List
 from app.db import get_conn
 from app.schemas import User, UserCreate
 
-def _serialize_audiolist(a: List[int]) -> str:
-    return ",".join(str(int(x)) for x in a) if a else ""
+def _serialize_audiolist(a: List[str]) -> str:
+    return ",".join(str(x) for x in a) if a else ""
 
-def _deserialize_audiolist(s: str) -> List[int]:
+def _deserialize_audiolist(s: str) -> List[str]:
     if not s:
         return []
-    return [int(x) for x in s.split(",") if x.strip() != ""]
+    return [x.strip() for x in s.split(",") if x.strip() != ""]
 
 def get_user(user_uuid: str) -> User:
     uid = str(user_uuid)
@@ -34,7 +34,7 @@ def create_user(user_in: UserCreate) -> User:
         conn.commit()
     return User(user_uuid=uid, audiolist=list(user_in.audiolist))
 
-def append_audios(user_uuid: str, audios: List[int]) -> User:
+def append_audios(user_uuid: str, audios: List[str]) -> User:
     uid = str(user_uuid)
     with get_conn() as conn:
         cur = conn.execute("SELECT audiolist FROM users WHERE user_uuid = ?", (uid,))
@@ -44,7 +44,7 @@ def append_audios(user_uuid: str, audios: List[int]) -> User:
         current = _deserialize_audiolist(row["audiolist"])
         new_set = set(current)
         for a in audios:
-            new_set.add(int(a))
+            new_set.add(str(a))
         new_list = list(new_set)
         conn.execute(
             "UPDATE users SET audiolist = ? WHERE user_uuid = ?",
@@ -53,9 +53,9 @@ def append_audios(user_uuid: str, audios: List[int]) -> User:
         conn.commit()
     return User(user_uuid=uid, audiolist=new_list)
 
-def delete_audio(user_uuid: str, item_id: int) -> User:
+def delete_audio(user_uuid: str, item_id: str) -> User:
     uid = str(user_uuid)
-    iid = int(item_id)
+    iid = str(item_id)
     with get_conn() as conn:
         cur = conn.execute("SELECT audiolist FROM users WHERE user_uuid = ?", (uid,))
         row = cur.fetchone()

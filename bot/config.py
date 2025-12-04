@@ -11,4 +11,5 @@ API_SECRET_BOT_KEY = getenv("API_SECRET_BOT_KEY")
 MIN_AUDIO_DURATION = 60
 MAX_AUDIO_DURATION = -1 # means no limit
 
-ID_STORAGE_PATH = Path(__file__).resolve().parent / "id_storage.db"
+USER_ID_STORAGE_PATH = Path(__file__).resolve().parent / "user_id_storage.db"
+MESSAGE_ID_STORAGE_PATH = Path(__file__).resolve().parent / "message_id_storage.db"
