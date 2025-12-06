@@ -14,6 +14,6 @@ user_id_storage = UserIDStorageUtils()
 async def cmd_start(message: Message):
     await message.reply(f"Message ID: {message.message_id}")
 
-    if api.get_user(message.from_user.id) == 404:
+    if user_id_storage.get_user_uuid(message.from_user.id) == None:
         new_uuid = user_id_storage.generate_and_store(message.from_user.id)
         return api.create_user(user_uuid=new_uuid)
