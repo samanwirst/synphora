@@ -4,7 +4,7 @@ from aiogram.types import Message
 from utils.common import CommonUtils
 from utils.api import APIUtils
 from utils.user_id_storage import UserIDStorageUtils
-from utils.message_id_storage import MessageIDStorageUtils
+from utils.file_id_storage import FileIDStorageUtils
 
 from config import MIN_AUDIO_DURATION, MAX_AUDIO_DURATION
 
@@ -13,7 +13,7 @@ audio_router = Router()
 utils = CommonUtils()
 api = APIUtils()
 user_id_storage = UserIDStorageUtils()
-message_id_storage = MessageIDStorageUtils()
+file_id_storage = FileIDStorageUtils()
 
 @audio_router.message(F.audio)
 async def handle_audio(message: Message):
@@ -28,6 +28,6 @@ async def handle_audio(message: Message):
         return
 
     user_uuid = user_id_storage.get_user_uuid(message.from_user.id)
-    message_uuid = message_id_storage.generate_and_store(message.message_id)
-    api.add_audiolist(user_uuid, audiolist=[message_uuid])
-    await message.reply(f"Great.\n{message.message_id}")
+    file_uuid = file_id_storage.generate_and_store(message.audio.file_id)
+    api.add_audiolist(user_uuid, audiolist=[file_uuid])
+    await message.reply(f"Great.\n{message.audio.file_id}")

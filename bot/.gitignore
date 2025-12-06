@@ -216,5 +216,5 @@ __marimo__/
 .streamlit/secrets.toml
 
 # Database
-message_id_storage.db
+file_id_storage.db
 user_id_storage.db

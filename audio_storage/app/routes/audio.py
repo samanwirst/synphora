@@ -1,4 +1,4 @@
-from fastapi import APIRouter, UploadFile, File, Query, HTTPException, status, Path, Depends
+from fastapi import APIRouter, UploadFile, File, Form, HTTPException, status, Path, Depends
 from fastapi.responses import FileResponse
 from pathlib import Path as PathLib
 from app.dependencies import verify_bot_key
@@ -21,7 +21,7 @@ def _mp3_path(name_no_ext: str) -> PathLib:
 @router.post("/", status_code=status.HTTP_201_CREATED, summary="Upload audio")
 async def upload_audio(
     file: UploadFile = File(..., description="Audio file to upload (any filename, will be saved as .mp3)"),
-    file_name: str = Query(..., description="Desired file name (without .mp3)"),
+    file_name: str = Form(..., description="Desired file name (without .mp3)"),
     _bot_ok: bool = Depends(verify_bot_key),
 ):
     try:
