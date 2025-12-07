@@ -6,6 +6,7 @@ load_dotenv()
 BOT_TOKEN = getenv("BOT_TOKEN")
 SERVER_API_URL = getenv("SERVER_API_URL")
 AUDIO_STORAGE_API_URL = getenv("AUDIO_STORAGE_API_URL")
+CLIENT_APP_URL = getenv("CLIENT_APP_URL")
 API_SECRET_BOT_KEY = getenv("API_SECRET_BOT_KEY")
 
 # seconds
