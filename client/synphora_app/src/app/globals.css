@@ -23,3 +23,87 @@
   --font-weight-medium: var(--tg-theme-font-weight-medium, 500);
   --font-weight-semibold: var(--tg-theme-font-weight-semibold, 600);
 }
+
+:root {
+  color-scheme: light dark;
+  --syn-fallback-bg-1: #eef3fb;
+  --syn-fallback-bg-2: #f8fbff;
+  --syn-fallback-text: #11213a;
+  --syn-fallback-subtext: #5f6d86;
+  --syn-fallback-border: rgba(17, 33, 58, 0.15);
+  --syn-fallback-glass: rgba(255, 255, 255, 0.62);
+  --syn-fallback-glass-strong: rgba(255, 255, 255, 0.8);
+  --syn-fallback-panel: rgba(255, 255, 255, 0.74);
+  --syn-fallback-ambient-1: rgba(121, 172, 255, 0.42);
+  --syn-fallback-ambient-2: rgba(153, 201, 255, 0.35);
+  --syn-fallback-track-muted: rgba(17, 33, 58, 0.12);
+  --syn-fallback-accent: #2f80ed;
+}
+
+:root[data-theme="dark"] {
+  --syn-fallback-bg-1: #0f1724;
+  --syn-fallback-bg-2: #192842;
+  --syn-fallback-text: #f4f7ff;
+  --syn-fallback-subtext: rgba(231, 238, 255, 0.72);
+  --syn-fallback-border: rgba(255, 255, 255, 0.16);
+  --syn-fallback-glass: rgba(255, 255, 255, 0.06);
+  --syn-fallback-glass-strong: rgba(255, 255, 255, 0.1);
+  --syn-fallback-panel: rgba(15, 23, 42, 0.32);
+  --syn-fallback-ambient-1: rgba(44, 69, 112, 0.55);
+  --syn-fallback-ambient-2: rgba(31, 52, 87, 0.52);
+  --syn-fallback-track-muted: rgba(255, 255, 255, 0.18);
+  --syn-fallback-accent: #4da2ff;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    --syn-fallback-bg-1: #0f1724;
+    --syn-fallback-bg-2: #192842;
+    --syn-fallback-text: #f4f7ff;
+    --syn-fallback-subtext: rgba(231, 238, 255, 0.72);
+    --syn-fallback-border: rgba(255, 255, 255, 0.16);
+    --syn-fallback-glass: rgba(255, 255, 255, 0.06);
+    --syn-fallback-glass-strong: rgba(255, 255, 255, 0.1);
+    --syn-fallback-panel: rgba(15, 23, 42, 0.32);
+    --syn-fallback-ambient-1: rgba(44, 69, 112, 0.55);
+    --syn-fallback-ambient-2: rgba(31, 52, 87, 0.52);
+    --syn-fallback-track-muted: rgba(255, 255, 255, 0.18);
+    --syn-fallback-accent: #4da2ff;
+  }
+}
+
+:root {
+  --syn-bg-1: var(--tg-theme-secondary-bg-color, var(--syn-fallback-bg-1));
+  --syn-bg-2: var(--tg-theme-bg-color, var(--syn-fallback-bg-2));
+  --syn-text: var(--tg-theme-text-color, var(--syn-fallback-text));
+  --syn-subtext: var(--tg-theme-hint-color, var(--syn-fallback-subtext));
+  --syn-border: var(--tg-theme-section-separator-color, var(--syn-fallback-border));
+  --syn-accent: var(--tg-theme-link-color, var(--syn-fallback-accent));
+  --syn-glass: var(--syn-fallback-glass);
+  --syn-glass-strong: var(--syn-fallback-glass-strong);
+  --syn-panel: var(--syn-fallback-panel);
+  --syn-ambient-1: var(--syn-fallback-ambient-1);
+  --syn-ambient-2: var(--syn-fallback-ambient-2);
+  --syn-track-muted: var(--syn-fallback-track-muted);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+  font-family: "SF Pro Text", "SF Pro Display", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: var(--syn-text);
+  background:
+    radial-gradient(1200px 560px at 20% -10%, var(--syn-ambient-1) 0%, transparent 55%),
+    radial-gradient(980px 480px at 90% -20%, var(--syn-ambient-2) 0%, transparent 60%),
+    linear-gradient(180deg, var(--syn-bg-2) 0%, var(--syn-bg-1) 100%);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}

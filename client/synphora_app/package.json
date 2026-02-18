@@ -3,10 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "dev:https": "next dev --experimental-https",
+    "dev": "concurrently -k -n NEXT,SOCKET \"pnpm dev:next\" \"pnpm dev:socket\"",
+    "dev:next": "next dev --experimental-https --experimental-https-key ./certificates/localhost-key.pem --experimental-https-cert ./certificates/localhost.pem --hostname ${NEXT_HOSTNAME:-127.0.0.1} --port ${NEXT_PORT:-3000}",
+    "dev:socket": "tsx server.ts",
+    "dev:https": "pnpm dev:next",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "start:socket": "tsx server.ts",
+    "start:all": "concurrently -k -n NEXT,SOCKET \"pnpm start\" \"pnpm start:socket\""
   },
   "dependencies": {
     "@telegram-apps/telegram-ui": "^2.1.13",
@@ -14,14 +18,19 @@
     "eruda": "^3.4.3",
     "next": "^16.0.7",
     "react": "^19.2.1",
-    "react-dom": "^19.2.1"
+    "react-dom": "^19.2.1",
+    "react-h5-audio-player": "^3.10.1",
+    "socket.io": "^4.8.1",
+    "socket.io-client": "^4.8.1"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "concurrently": "^9.2.1",
     "tailwindcss": "^4",
+    "tsx": "^4.20.6",
     "typescript": "^5"
   }
 }

@@ -1,0 +1,184 @@
+.page {
+  min-height: 100dvh;
+  padding: 16px;
+  display: flex;
+  justify-content: center;
+}
+
+.container {
+  width: min(740px, 100%);
+  display: grid;
+  gap: 14px;
+  align-content: start;
+}
+
+.hero {
+  border-radius: 30px;
+  border: 1px solid var(--syn-border);
+  background: linear-gradient(170deg, var(--syn-glass-strong) 0%, var(--syn-glass) 100%);
+  backdrop-filter: blur(18px);
+  padding: 16px 18px;
+  box-shadow: 0 10px 34px rgba(8, 14, 28, 0.32);
+  display: grid;
+  gap: 6px;
+}
+
+.title {
+  margin: 0;
+  font-size: 28px;
+  line-height: 1.1;
+  letter-spacing: -0.025em;
+}
+
+.subtitle {
+  margin: 0;
+  color: var(--syn-subtext);
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.mono {
+  font-family: ui-monospace, "SFMono-Regular", Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-size: 12px;
+  color: var(--syn-subtext);
+  word-break: break-all;
+}
+
+.list {
+  display: grid;
+  gap: 12px;
+}
+
+.form {
+  display: grid;
+  gap: 12px;
+}
+
+.errorText {
+  color: #ff8f9b;
+  font-size: 13px;
+}
+
+.playerPanel {
+  display: grid;
+  gap: 12px;
+  border-radius: 24px;
+  border: 1px solid var(--syn-border);
+  background: var(--syn-panel);
+  padding: 14px;
+}
+
+.readyPlayer {
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.readyPlayer :global(.rhap_container) {
+  background: transparent;
+  border: 1px solid var(--syn-border);
+  border-radius: 20px;
+  box-shadow: none;
+  padding: 12px;
+}
+
+.readyPlayer :global(.rhap_time),
+.readyPlayer :global(.rhap_current-time),
+.readyPlayer :global(.rhap_total-time) {
+  color: var(--syn-subtext);
+}
+
+.readyPlayer :global(.rhap_progress-bar) {
+  background: var(--syn-track-muted);
+}
+
+.readyPlayer :global(.rhap_progress-filled),
+.readyPlayer :global(.rhap_progress-indicator),
+.readyPlayer :global(.rhap_volume-indicator),
+.readyPlayer :global(.rhap_volume-filled) {
+  background: linear-gradient(90deg, #6ec9ff, #4da2ff);
+}
+
+.readyPlayer :global(.rhap_button-clear) {
+  color: var(--syn-text);
+}
+
+.lockedPlayer :global(.rhap_controls-section),
+.lockedPlayer :global(.rhap_progress-container),
+.lockedPlayer :global(.rhap_additional-controls) {
+  pointer-events: none;
+  opacity: 0.7;
+}
+
+.trackRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+}
+
+.trackPrimary {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.trackSecondary {
+  color: var(--syn-subtext);
+  font-size: 12px;
+}
+
+.timeRow {
+  display: flex;
+  justify-content: space-between;
+  color: var(--syn-subtext);
+  font-size: 12px;
+}
+
+.controls {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.speedRow {
+  display: grid;
+  gap: 8px;
+}
+
+.badgeRow {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.badge {
+  border-radius: 999px;
+  border: 1px solid var(--syn-border);
+  background: var(--syn-glass);
+  padding: 4px 10px;
+  font-size: 12px;
+}
+
+.badgeGood {
+  border-color: rgba(110, 223, 164, 0.45);
+  background: rgba(52, 199, 89, 0.14);
+}
+
+.badgeWarn {
+  border-color: rgba(255, 186, 105, 0.45);
+  background: rgba(255, 159, 10, 0.16);
+}
+
+.sectionHint {
+  color: var(--syn-subtext);
+  font-size: 12px;
+}
+
+@media (max-width: 520px) {
+  .controls {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .title {
+    font-size: 24px;
+  }
+}

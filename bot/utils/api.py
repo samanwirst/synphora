@@ -1,14 +1,18 @@
+import asyncio
+from typing import Any, Dict, List, Optional
+
 import requests
-from typing import Optional, List, Any, Dict
 
 from config import SERVER_API_URL, AUDIO_STORAGE_API_URL, API_SECRET_BOT_KEY
 
 
 class APIUtils:
     USERS_PATH = "/users/"
+    ROOMS_PATH = "/rooms/"
     
-    def __init__(self, base_url: str = SERVER_API_URL):
-        self.base_url = base_url.rstrip("/")
+    def __init__(self):
+        if not API_SECRET_BOT_KEY:
+            raise RuntimeError("API_SECRET_BOT_KEY is not configured")
         self.headers = {
             "X-API-KEY": API_SECRET_BOT_KEY
         }
@@ -25,13 +29,13 @@ class APIUtils:
         resp.raise_for_status()
         return resp.json()
 
-    def _delete(self, base: str, path: str) -> dict:
+    def _delete(self, base: str, path: str) -> dict | None:
         url = f"{base}{path}"
         resp = requests.delete(url, headers=self.headers)
         resp.raise_for_status()
         if resp.content:
             return resp.json()
-        return
+        return None
     
     def _post_file(self, base: str, path: str, file_field: str, file_path: str, body: Dict[str, Any]) -> dict:
         url = f"{base}{path}"
@@ -59,13 +63,24 @@ class APIUtils:
         payload = {"audiolist": audiolist}
         return self._post(SERVER_API_URL, f"{self.USERS_PATH}{user_uuid}/audiolist", payload)
 
-    def delete_audio_item(self, user_uuid: str, item_uuid: str) -> dict:
+    def delete_audio_item(self, user_uuid: str, item_uuid: str) -> dict | None:
         return self._delete(SERVER_API_URL, f"{self.USERS_PATH}{user_uuid}/audiolist/{item_uuid}")
+
+    def create_room(self, creator_user_uuid: str, creator_telegram_id: int, track_ids: List[str]) -> dict:
+        payload = {
+            "creator_user_uuid": creator_user_uuid,
+            "creator_telegram_id": creator_telegram_id,
+            "track_ids": track_ids,
+        }
+        return self._post(SERVER_API_URL, self.ROOMS_PATH, payload)
     
     
-    async def upload_audio_file(self, file_path: str, file_name: str) -> dict:
+    def upload_audio_file(self, file_path: str, file_name: str) -> dict:
         body = {"file_name": file_name}
         return self._post_file(AUDIO_STORAGE_API_URL, "/files/", "file", file_path, body)
 
-    def delete_audio_file(self, file_name: str) -> dict:
+    async def upload_audio_file_async(self, file_path: str, file_name: str) -> dict:
+        return await asyncio.to_thread(self.upload_audio_file, file_path, file_name)
+
+    def delete_audio_file(self, file_name: str) -> dict | None:
         return self._delete(AUDIO_STORAGE_API_URL, f"/files/{file_name}")

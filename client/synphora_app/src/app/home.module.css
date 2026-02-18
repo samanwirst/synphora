@@ -1,0 +1,59 @@
+.page {
+  min-height: 100dvh;
+  padding: 16px;
+  display: flex;
+  justify-content: center;
+}
+
+.container {
+  width: min(680px, 100%);
+  display: grid;
+  gap: 14px;
+  align-content: start;
+}
+
+.hero {
+  border: 1px solid var(--syn-border);
+  background: linear-gradient(180deg, var(--syn-glass-strong), var(--syn-glass));
+  backdrop-filter: blur(18px);
+  border-radius: 28px;
+  padding: 18px;
+  box-shadow: 0 12px 36px rgba(8, 12, 20, 0.28);
+}
+
+.heroTitle {
+  margin: 0;
+  font-size: 32px;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+}
+
+.heroText {
+  margin: 8px 0 0;
+  color: var(--syn-subtext);
+  font-size: 15px;
+  line-height: 1.35;
+}
+
+.list {
+  display: grid;
+  gap: 12px;
+}
+
+.form {
+  display: grid;
+  gap: 12px;
+}
+
+.helperRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--syn-subtext);
+  font-size: 13px;
+}
+
+.tinyNote {
+  color: var(--syn-subtext);
+  font-size: 12px;
+}

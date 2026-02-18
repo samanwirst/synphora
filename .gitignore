@@ -1,0 +1,27 @@
+# Monorepo-wide safety ignores
+.DS_Store
+.idea/
+.vscode/
+*.log
+
+# Python runtime artifacts
+**/__pycache__/
+**/.pytest_cache/
+**/.mypy_cache/
+**/.ruff_cache/
+**/.venv/
+**/venv/
+**/*.db
+**/*.sqlite
+**/*.sqlite3
+
+# Node/Next runtime artifacts
+**/node_modules/
+**/.next/
+**/out/
+
+# Local env files
+**/.env
+**/.env.*
+!**/.env.example
+!**/.env.sample

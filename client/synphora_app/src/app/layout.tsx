@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import "react-h5-audio-player/lib/styles.css";
 import type { PropsWithChildren } from "react";
 import LayoutDefault from "@/components/Layouts/LayoutDefault";
 

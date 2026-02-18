@@ -3,7 +3,10 @@ declare global {
         Telegram?: {
             WebApp?: {
                 ready(): void;
+                initData?: string;
                 colorScheme?: 'light' | 'dark';
+                onEvent?(eventType: 'themeChanged', callback: () => void): void;
+                offEvent?(eventType: 'themeChanged', callback: () => void): void;
                 themeParams?: {
                     bg_color?: string;
                     text_color?: string;
@@ -12,6 +15,9 @@ declare global {
                     button_color?: string;
                     button_text_color?: string;
                     secondary_bg_color?: string;
+                };
+                HapticFeedback?: {
+                    impactOccurred(style: 'light' | 'medium' | 'heavy' | 'rigid' | 'soft'): void;
                 };
                 initDataUnsafe?: {
                     user?: {
